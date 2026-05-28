@@ -1,0 +1,20 @@
+// utils/validate.js
+const ALLOWED = ['audio/webm', 'audio/mp4', 'audio/mpeg', 'audio/wav', 'audio/ogg']
+const MAX_MB = 25
+
+export function validateAudioFile(file) {
+  if (!file) return 'No file selected.'
+  if (!ALLOWED.includes(file.type))
+    return `Unsupported format: ${file.type}. Use MP3, WAV, WebM or OGG.`
+  if (file.size > MAX_MB * 1024 * 1024)
+    return `File too large. Max size is ${MAX_MB}MB.`
+  return null
+}
+
+// Usage in Uploader.jsx
+const handleUpload = (e) => {
+  const file = e.target.files[0]
+  const err = validateAudioFile(file)
+  if (err) { setError(err); return }
+  // proceed with upload...
+}

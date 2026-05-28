@@ -1,0 +1,24 @@
+// middleware/validateUpload.js
+const ALLOWED_MIME = [
+  'audio/webm', 'audio/mp4', 'audio/mpeg',
+  'audio/wav', 'audio/ogg'
+]
+
+const validateUpload = (req, res, next) => {
+  if (!req.file)
+    return res.status(400).json({ error: 'No audio file received.' })
+
+  if (!ALLOWED_MIME.includes(req.file.mimetype))
+    return res.status(415).json({ error: 'Unsupported audio format.' })
+
+  const maxBytes = 25 * 1024 * 1024
+  if (req.file.size > maxBytes)
+    return res.status(413).json({ error: 'File exceeds 25MB limit.' })
+
+  next()
+}
+
+module.exports = validateUpload
+
+// In routes/transcribe.js:
+// router.post('/transcribe', upload.single('audio'), validateUpload, handler)
