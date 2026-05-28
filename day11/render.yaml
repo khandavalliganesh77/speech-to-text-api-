@@ -1,0 +1,17 @@
+# render.yaml — place in repo root
+services:
+  - type: web
+    name: voicescript-api
+    env: node
+    plan: free
+    buildCommand: "cd server && npm install"
+    startCommand: "cd server && node index.js"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false # set in Render dashboard
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: PORT
+        value: 10000 # Render assigns this automatically

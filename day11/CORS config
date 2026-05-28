@@ -1,0 +1,17 @@
+// server/index.js — production CORS
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://your-app.netlify.app',
+  'https://your-app.vercel.app',
+]
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('CORS blocked: ' + origin))
+    }
+  },
+  credentials: true,
+}))

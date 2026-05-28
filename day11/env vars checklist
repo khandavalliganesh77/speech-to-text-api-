@@ -1,0 +1,11 @@
+# Environment variables to set in Render dashboard:
+#
+# NODE_ENV        = production
+# PORT            = 10000
+# MONGO_URI       = mongodb+srv://user:pass@cluster.mongodb.net/speechapp
+#                   (whitelist 0.0.0.0/0 in MongoDB Atlas Network Access)
+# OPENAI_API_KEY  = sk-...
+# GOOGLE_API_KEY  = AIza...  (if using Google STT)
+#
+# MongoDB Atlas: Network Access → Add IP → 0.0.0.0/0 (allow all)
+# Render auto-assigns HTTPS — no manual SSL setup needed
