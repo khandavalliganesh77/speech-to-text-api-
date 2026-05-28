@@ -1,0 +1,27 @@
+// server/__tests__/api.test.js
+const request = require('supertest')
+const app = require('../index')
+const path = require('path')
+
+describe('POST /api/transcribe', () => {
+  it('returns 400 when no file sent', async () => {
+    const res = await request(app).post('/api/transcribe')
+    expect(res.statusCode).toBe(400)
+    expect(res.body.error).toBeDefined()
+  })
+
+  it('returns 415 for non-audio file', async () => {
+    const res = await request(app)
+      .post('/api/transcribe')
+      .attach('audio', path.resolve('__tests__/fixtures/test.txt'))
+    expect(res.statusCode).toBe(415)
+  })
+})
+
+describe('GET /api/history', () => {
+  it('returns an array', async () => {
+    const res = await request(app).get('/api/history')
+    expect(res.statusCode).toBe(200)
+    expect(Array.isArray(res.body)).toBe(true)
+  })
+})

@@ -1,0 +1,21 @@
+# Pre-submission checklist
+
+## Backend
+[ ] All routes return JSON errors (no HTML 500 pages)
+[ ] File cleanup: delete temp uploads after transcription
+[ ] MONGO_URI, API keys set in production env
+[ ] CORS origins updated to prod frontend URL
+[ ] No console.log in production (use a logger or NODE_ENV guard)
+
+## Frontend
+[ ] VITE_API_URL set in Netlify/Vercel environment
+[ ] Loading + error states on every async action
+[ ] ErrorBoundary wraps the app root
+[ ] Auth redirects work on page reload
+[ ] Mobile responsive (tested on 375px)
+
+## Cleanup
+[ ] Remove all console.log / debugger statements
+[ ] .env files in .gitignore
+[ ] node_modules in .gitignore
+[ ] uploads/ folder in .gitignore
