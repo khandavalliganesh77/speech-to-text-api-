@@ -1,0 +1,18 @@
+// services/openai.js
+const OpenAI = require('openai')
+const fs = require('fs')
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+
+const transcribeWithWhisper = async (filePath) => {
+  const transcription = await openai.audio.transcriptions.create({
+    file: fs.createReadStream(filePath),
+    model: 'whisper-1',
+    language: 'en',
+    response_format: 'text'
+  })
+
+  return transcription
+}
+
+module.exports = { transcribeWithWhisper }

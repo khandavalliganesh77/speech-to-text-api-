@@ -1,0 +1,24 @@
+// services/google.js
+const speech = require('@google-cloud/speech')
+const fs = require('fs')
+
+const client = new speech.SpeechClient()
+
+const transcribeWithGoogle = async (filePath) => {
+  const audioBytes = fs.readFileSync(filePath).toString('base64')
+
+  const [response] = await client.recognize({
+    audio: { content: audioBytes },
+    config: {
+      encoding: 'WEBM_OPUS',
+      sampleRateHertz: 48000,
+      languageCode: 'en-US',
+    },
+  })
+
+  return response.results
+    .map(r => r.alternatives[0].transcript)
+    .join(' ')
+}
+
+module.exports = { transcribeWithGoogle }
