@@ -1,0 +1,15 @@
+# netlify.toml — place in repo root
+[build]
+  base    = "client"
+  command = "npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
+
+# Vercel: add vercel.json instead
+# {
+#   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+# }

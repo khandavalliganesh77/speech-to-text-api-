@@ -1,0 +1,14 @@
+# client/.env.production
+
+VITE_API_URL=https://voicescript-api.onrender.com
+
+# client/.env.development
+
+VITE_API_URL=http://localhost:5000
+
+--- vite.config.js (dev proxy, already set in Day 1) ---
+server: {
+proxy: {
+'/api': process.env.VITE_API_URL || 'http://localhost:5000'
+}
+}
