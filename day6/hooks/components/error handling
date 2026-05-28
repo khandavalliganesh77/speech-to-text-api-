@@ -1,0 +1,19 @@
+// Global Axios error interceptor (add to src/main.jsx)
+import axios from 'axios'
+
+axios.interceptors.response.use(
+  response => response,
+  error => {
+    const msg = error.response?.data?.error || error.message
+    console.error('[API Error]', msg)
+    return Promise.reject(error)
+  }
+)
+
+// Backend error middleware (add to server/index.js)
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(err.status || 500).json({
+    error: err.message || 'Internal server error'
+  })
+})
