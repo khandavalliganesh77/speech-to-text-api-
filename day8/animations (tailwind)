@@ -1,0 +1,27 @@
+/* tailwind.config.js — custom animations */
+module.exports = {
+  theme: {
+    extend: {
+      animation: {
+        'pulse-slow': 'pulse 2s cubic-bezier(0.4,0,0.6,1) infinite',
+        'fade-in': 'fadeIn 0.3s ease-out',
+        'slide-up': 'slideUp 0.25s ease-out',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(8px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+      },
+    },
+  },
+}
+
+/* Usage in JSX */
+// <div className="animate-fade-in"> — on transcription result
+// <div className="animate-slide-up"> — on cards
+// <span className="animate-pulse-slow"> — on recording indicator
